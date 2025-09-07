@@ -17,15 +17,15 @@
 
 <div class="progress">
     <div class="progress-bar">
-        <div class="progress-value"></div>
+        <div class="progress-value">40%</div>
     </div>
 </div>
 
 <div class="row">
-    <div class="card">
+    <div class="card done">
         <h3>HTML</h3>
     </div>
-    <div class="card">
+    <div class="card done">
         <h3>CSS</h3>
     </div>
     <div class="card">
@@ -38,6 +38,7 @@
         <h3>React</h3>
     </div>
 </div>
+<!-- <div class="empty">No content</div> -->
 
 <form class="form">
     <h2 class="heading">Add technology</h2>
@@ -48,13 +49,32 @@
 
     <div class="form-control">
         <label for="description">Description</label>
-        <textarea  id="description" name="description" placeholder="Enter a description"></textarea>
+        <textarea id="description" name="description" placeholder="Enter a description"></textarea>
     </div>
 
     <button type="submit" class="btn">Create</button>
 </form>
 
     </div>
+
+    <div class="modal">
+        <h2>Title</h2>
+        <p>Lorem ipsum dolor sit, 
+            amet consectetur adipisicing elit. 
+            Ipsum omnis sequi aliquid repellat, 
+            perferendis veniam! 
+            Autem sint eaque suscipit delectus!
+        </p>
+
+        <hr>
+
+        <div>
+            <input type="checkbox" id="done">
+            <label for="done">Learned</label>
+        </div>
+    </div>
+
+    <div class="modal-backdrop"></div>
     
 </body>
 </html>

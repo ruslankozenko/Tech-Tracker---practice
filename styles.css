@@ -52,10 +52,10 @@ body {
     transition: .4s box-shadow;
 }
 
-/* .card.done {
+.card.done { 
     background: var(--green);
     color: #fff;
-} */
+} 
 
 .card:hover {
     cursor: pointer;

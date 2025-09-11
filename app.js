@@ -26,23 +26,28 @@ function init() {
     if (technologies.length === 0) {
     content.innerHTML = '<p class="empty">No technologies added. Add the first one.</p>'
 } else {
-     let html = ''
-for (let i = 0; i < technologies.length; i++) {
-    const tech = technologies[i]
-    html += toCard(tech)
-}
-content.innerHTML = html
+    let html = ''
+    for (let i = 0; i < technologies.length; i++) {
+        const tech = technologies[i]
+        html += toCard(tech)
+    }
+    content.innerHTML = html
+
+    // Альтернатіва:
+    // content.innerHTML = technologies.map(toCard).join('')
 }
 }
 
 function toCard(tech) {
-    let doneClass = ''
+    // Альтернатіва:
+    // let doneClass = ''
 
-    if (tech.done === true) {
-        doneClass = 'done'
-    } else {
-        doneClass = ''
-    }
+    // if (tech.done === true) {
+    //     doneClass = 'done'
+    // } else {
+    //     doneClass = ''
+    // }
+    const doneClass = tech.done ? 'done' : ''
 
     return ` <div class="card ${doneClass}">
     <h3>${tech.title}</h3>

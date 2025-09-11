@@ -2,6 +2,7 @@
 const modal = document.querySelector('#modal')
 const content = document.querySelector('#content')
 const backdrop = document.querySelector('#backdrop')
+const progress = document.querySelector('#progress')
 
 content.addEventListener('click', openCard)
 backdrop.addEventListener('click', closeModal)
@@ -23,6 +24,11 @@ function closeModal() {
 }
 
 function init() {
+    renderCards()
+    renderProgress()
+}
+
+function renderCards() {
     if (technologies.length === 0) {
     content.innerHTML = '<p class="empty">No technologies added. Add the first one.</p>'
 } else {
@@ -33,9 +39,41 @@ function init() {
     }
     content.innerHTML = html
 
-    // Альтернатіва:
+    // Альтернатіва else:
     // content.innerHTML = technologies.map(toCard).join('')
 }
+}
+
+function renderProgress() {
+    const percent = computeProgressPercent()
+
+    let background 
+
+    if (percent <= 30) {
+        background = '#E75A5A'
+    } else if (percent > 30 && percent < 70) {
+        background = ' #F99415'
+    } else {
+        background = '#73BA3C'
+    }
+    
+    progress.style.background = background
+    progress.style.width = percent + '%'
+    progress.textContent = percent ? percent + '%' : ''
+}
+
+function computeProgressPercent() {
+
+    if (technologies.length === 0) {
+        return 0 
+    }
+
+    let doneCout = 0
+    for (let i = 0; i < technologies.length; i++) {
+        if (technologies[i].done) doneCout++ 
+    }
+
+    return Math.round((100 * doneCout) / technologies.length)
 }
 
 function toCard(tech) {

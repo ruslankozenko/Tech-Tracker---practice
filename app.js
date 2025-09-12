@@ -7,15 +7,26 @@ const progress = document.querySelector('#progress')
 content.addEventListener('click', openCard)
 backdrop.addEventListener('click', closeModal)
 
+const APP_TITLE = document.title
+
 const technologies =[
     {title: 'HTML', description: 'HTML Text', type: 'html', done: true},
-    {title: 'CSS', description: 'CSS Text', type: 'css', done: true},
+    {title: 'CSS', description: 'CSS Text', type: 'css', done: false},
     {title: 'JavaScript', description: 'JavaScript Text', type: 'js', done: false},
     {title: 'Git', description: 'Git Text', type: 'git', done: false},
     {title: 'React', description: 'React Text', type: 'react', done: false}
 ]
 
-function openCard() {
+function openCard(event) {
+    const data = event.target.dataset
+    const tech = technologies.find(t => t.type === data.type)
+    if(!tech) return
+
+    openModal('<h1>TEST</h1>', tech.title)
+}
+
+function openModal(html, title = APP_TITLE) {
+    document.title = `${title} | ${APP_TITLE}`
     modal.classList.add('open')
 }
 
@@ -87,8 +98,8 @@ function toCard(tech) {
     // }
     const doneClass = tech.done ? 'done' : ''
 
-    return ` <div class="card ${doneClass}">
-    <h3>${tech.title}</h3>
+    return ` <div class="card ${doneClass}" data-type="${tech.type}">
+    <h3 data-type="${tech.type}">${tech.title}</h3>
     </div> `
 }
 

@@ -6,6 +6,7 @@ const progress = document.querySelector('#progress')
 
 content.addEventListener('click', openCard)
 backdrop.addEventListener('click', closeModal)
+modal.addEventListener('change', toggleTech)
 
 const APP_TITLE = document.title
 
@@ -22,15 +23,40 @@ function openCard(event) {
     const tech = technologies.find(t => t.type === data.type)
     if(!tech) return
 
-    openModal('<h1>TEST</h1>', tech.title)
+    openModal(toModal(tech), tech.title)
+}
+
+function toModal(tech) {
+    const checked = tech.done ? 'checked' : ''
+    return `
+       <h2>${tech.title}</h2>
+        <p>${tech.description}</p>
+
+        <hr>
+
+        <div>
+            <input type="checkbox" id="done" ${checked} data-type="${tech.type}">
+            <label for="done">Learned</label>
+        </div>
+    `
+}
+
+function toggleTech(event) {
+    const type = event.target.dataset.type
+    const tech = technologies.find(t => t.type === type)
+    tech.done = event.target.checked
+
+    init()
 }
 
 function openModal(html, title = APP_TITLE) {
     document.title = `${title} | ${APP_TITLE}`
+    modal.innerHTML = html
     modal.classList.add('open')
 }
 
 function closeModal() {
+    document.title = APP_TITLE
     modal.classList.remove('open')
 }
 

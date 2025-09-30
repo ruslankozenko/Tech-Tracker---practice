@@ -10,14 +10,10 @@ modal.addEventListener('change', toggleTech)
 form.addEventListener('submit', createTech)
 
 const APP_TITLE = document.title
+const LS_KEY = 'MY_TECHS'
 
-const technologies =[
-    {title: 'HTML', description: 'HTML Text', type: 'html', done: true},
-    {title: 'CSS', description: 'CSS Text', type: 'css', done: false},
-    {title: 'JavaScript', description: 'JavaScript Text', type: 'js', done: false},
-    {title: 'Git', description: 'Git Text', type: 'git', done: false},
-    {title: 'React', description: 'React Text', type: 'react', done: false}
-]
+const technologies = getState()
+
 
 function openCard(event) {
     const data = event.target.dataset
@@ -47,6 +43,7 @@ function toggleTech(event) {
     const tech = technologies.find(t => t.type === type)
     tech.done = event.target.checked
 
+    saveState()
     init()
 }
 
@@ -164,8 +161,17 @@ function createTech(event) {
     technologies.push(newTech)
     title.value = ''
     description.value = ''
+    saveState()
     init()
 }
 
+function saveState() {
+    localStorage.setItem(LS_KEY, JSON.stringify(technologies))
+}
+
+function getState() {
+    const raw = localStorage.getItem(LS_KEY)
+    return raw ? JSON.parse(raw) : []
+}
 
 init()    
